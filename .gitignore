@@ -1,0 +1,44 @@
+AGENTS.md
+/.agents/
+/hermes/
+/tasks/
+/docs/ROSTER.md
+/docs/WORKFLOW.md
+/docs/WORKLOG.md
+
+# secrets and local state
+.env
+.DS_Store
+.hermes/plans/
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+dist/
+
+# pipeline scratch: raw and intermediate data stay local
+pipeline/data/raw/*
+pipeline/data/interim/*
+pipeline/data/processed/*
+!pipeline/data/raw/.gitkeep
+!pipeline/data/interim/.gitkeep
+!pipeline/data/processed/.gitkeep
+
+# run folders stay local, but each run's manifest is tracked for provenance
+pipeline/runs/*
+!pipeline/runs/.gitkeep
+!pipeline/runs/*/
+pipeline/runs/*/*
+!pipeline/runs/*/manifest.json
+
+# paper PDFs are not committed (copyright); notes are
+references/literature/pdfs/*
+!references/literature/pdfs/.gitkeep
+
+*.log
