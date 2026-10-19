@@ -5,6 +5,7 @@ AGENTS.md
 /docs/ROSTER.md
 /docs/WORKFLOW.md
 /docs/WORKLOG.md
+/skills/
 
 # secrets and local state
 .env
