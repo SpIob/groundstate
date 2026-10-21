@@ -1,0 +1,11 @@
+[project]
+name = "groundstate-pipeline"
+version = "0.1.0"
+description = "Groundstate v1 pipeline (offline, batch)"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "pymatgen",
+    "mp-api",
+    "ase",
+    "chgnet",
+]

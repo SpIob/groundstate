@@ -6,6 +6,7 @@ AGENTS.md
 /docs/WORKFLOW.md
 /docs/WORKLOG.md
 /skills/
+/website/
 
 # secrets and local state
 .env

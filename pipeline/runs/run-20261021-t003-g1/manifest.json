@@ -1,0 +1,44 @@
+{
+  "run_id": "run-20261021-t003-g1",
+  "created_at_utc": "2026-10-21T07:37:37+00:00",
+  "git_sha": "d320cac956c23ac3dd99d4e3a5e80c461db2c549",
+  "git_dirty": true,
+  "task": "T-003 (gate G1 benchmark, decisions D-001 set / D-003 gate)",
+  "package_versions": {
+    "pymatgen": "2026.9.24",
+    "mp_api": "0.47.0",
+    "ase": "3.29.0",
+    "chgnet": "0.4.2",
+    "torch": "2.14.1"
+  },
+  "model_name": "CHGNet",
+  "model_version": "0.3.0",
+  "device": "mps",
+  "seeds": {
+    "torch_manual_seed": 0,
+    "note": "CHGNet inference is deterministic; seed recorded for completeness"
+  },
+  "input_ids": [
+    "mp-22526",
+    "mp-19017",
+    "mp-22584"
+  ],
+  "input_provenance": "pipeline/data/raw/<id>/provenance.json (stage 1, MP db 2026.09.28)",
+  "settings": {
+    "model": "CHGNet",
+    "model_version": "0.3.0",
+    "optimizer": "FIRE",
+    "ase_filter": "FrechetCellFilter",
+    "fmax_eV_A": 0.05,
+    "max_steps": 500,
+    "relax_cell": true,
+    "assign_magmoms": true,
+    "device": "mps",
+    "arrangements_policy": "one arrangement per lithiation state: x=1 uses the pulled MP structure as-is; x=0 removes all Li from the same cell (vacancy-ordered framework). RQ-2 cap recorded in manifest: LFP has 24 possible orderings, LMO 720; benchmark relaxes 1 per state.",
+    "li_reference": "bcc Li, conventional 2-atom cell a=3.5093 A, relaxed with the same model/optimizer/fmax/cell relaxation. Never a database Li energy (D-rule)."
+  },
+  "rq_flags": {
+    "RQ-2": "arrangement cap: 1 per state (24 possible for LFP, 720 for LMO)",
+    "RQ-3": "magnetic ordering: CHGNet internal magmom prediction (assign_magmoms=true); no explicit FM/AFM constraint"
+  }
+}
