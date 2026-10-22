@@ -1,0 +1,95 @@
+{
+  "material_id": "mp-18997",
+  "formula": "LiMnPO4",
+  "predicted_voltage_V": 3.6865,
+  "capacity_mAh_g": 170.9,
+  "capacity_basis": "per gram of the lithiated host formula unit (D-005 option A, DECIDED 2026-10-21)",
+  "e_above_hull_eV_atom": 0.0,
+  "run_id": "run-20261022-t004-lmp",
+  "audit_status": "PASS WITH FLAGS",
+  "approved_by": "Mico",
+  "approved_at": "2026-10-22",
+  "disclaimer_version": 1,
+  "citations": [
+    "yamada-2001-lmp",
+    "zaghib-2013-lmp",
+    "mp-database"
+  ],
+  "result_type": "computed estimate",
+  "statement": "Computed estimate from CHGNet v0.3.0 relaxations. Not an experimental measurement; no synthesis, validation, or discovery claim is made.",
+  "d004_comparison": {
+    "decision": "D-004 option A (DECIDED 2026-10-21): beat a named baseline on a single metric",
+    "baseline_material_id": "mp-19017",
+    "baseline_formula": "LiFePO4",
+    "baseline_predicted_voltage_V": 3.4239,
+    "metric": "predicted average voltage 0->1 (V vs Li/Li+), same run, same model and settings",
+    "delta_V": 0.2626,
+    "verdict": "candidate_beats_baseline"
+  },
+  "stability": {
+    "e_above_hull_eV_atom": 0.0,
+    "unit": "eV/atom",
+    "source": "materials_project (thermo doc, double-queried)",
+    "database_version": "2026.09.28",
+    "d002_band": "within",
+    "baseline_e_above_hull_eV_atom": 0.0,
+    "caveat": "Zero-kelvin computed value (DFT, Materials Project); ignores kinetics and entropy. Says nothing about whether the phase actually forms under real synthesis conditions."
+  },
+  "literature_crosscheck": {
+    "plateau_V_vs_Li": 4.1,
+    "plateau_citation": "yamada-2001-lmp (Mn3+/Mn2+ two-phase redox region)",
+    "plateau_2nd_source_V_vs_Li": 4.1,
+    "plateau_2nd_citation": "zaghib-2013-lmp",
+    "theoretical_capacity_mAh_g": 170,
+    "capacity_citation": "yamada-2001-lmp (one-electron M3+/M2+ redox, host-formula basis per D-005)",
+    "offset_V_predicted_minus_literature": -0.4135,
+    "offset_note": "offset field = predicted minus literature (3.6865 - 4.1 = -0.4135 V). Predicted voltage sits 0.41 V below the literature Mn3+/Mn2+ plateau (D-008 DECIDED 2026-10-22, option A: chemistry-correlated offset up to ~0.4-0.5 V on layered Co oxides AND Mn olivine; Fe olivine and Mn spinel verified within ~0.03 V). Relative rankings within one chemistry are usable; absolute cross-chemistry comparisons are not.",
+    "practicality_note": "The literature also reports kinetic and electrode-engineering obstacles for pure LiMnPO4 (capacity far below theoretical, large polarization, Fe coexistence needed at the 4c site, Jahn-Teller instability of Mn-rich compositions). These are distinct from this zero-kelvin thermodynamic estimate and are not contradicted by it."
+  },
+  "benchmark_gate": {
+    "g1_run": "run-20261021-t003-g1",
+    "g1_verdict": "FAIL (recorded; characterized limitation per D-007/D-008, both DECIDED option A)",
+    "treatment": "benchmark-exempt for this candidate: the D-004 comparison is within one chemistry (olivine vs olivine), the axis D-008 declares usable"
+  },
+  "method": {
+    "model": "CHGNet 0.3.0",
+    "device": "mps",
+    "package_versions": {
+      "pymatgen": "2026.9.24",
+      "mp_api": "0.47.0",
+      "ase": "3.29.0",
+      "chgnet": "0.4.2",
+      "torch": "2.14.1"
+    },
+    "formula_version": "v0.2",
+    "settings": {
+      "model": "CHGNet",
+      "model_version": "0.3.0",
+      "optimizer": "FIRE",
+      "ase_filter": "FrechetCellFilter",
+      "fmax_eV_A": 0.05,
+      "max_steps": 500,
+      "relax_cell": true,
+      "assign_magmoms": true,
+      "device": "mps",
+      "identical_settings_to": "run-20261021-t003-g1",
+      "arrangements_policy": "one arrangement per lithiation state: x=1 uses the pulled MP structure as-is; x=0 removes all Li from the same cell (vacancy-ordered framework). RQ-2 cap recorded in manifest: 4 Li sites per 4-fu olivine cell = 24 possible orderings; this run relaxes 1 per state.",
+      "li_reference": "bcc Li, conventional 2-atom cell a=3.5093 A, relaxed with the same model/optimizer/fmax/cell relaxation. Never a database Li energy (D-rule)."
+    },
+    "arrangements_policy": "one arrangement per lithiation state: x=1 uses the pulled MP structure as-is; x=0 removes all Li from the same cell (vacancy-ordered framework). RQ-2 cap recorded in manifest: 4 Li sites per 4-fu olivine cell = 24 possible orderings; this run relaxes 1 per state.",
+    "rq_flags": {
+      "RQ-2": "arrangement cap: 1 per state (24 possible orderings per 4-fu olivine cell)",
+      "RQ-3": "magnetic ordering: CHGNet internal magmom prediction (assign_magmoms=true); no explicit FM/AFM constraint"
+    },
+    "structure_provenance": {
+      "source": "materials_project",
+      "database_version": "2026.09.28",
+      "retrieval_time_utc": "2026-10-22T03:26:34+00:00",
+      "space_group": "Pnma",
+      "atoms_per_cell": 28,
+      "theoretical_or_observed": "theoretical=false (resolved live 2026-10-22 by the G2 audit session's MP query; run-time value UNVERIFIED, sub-endpoint error)",
+      "theoretical_or_observed_source": "G2 audit session, 2026-10-22, mp-api live query of mp-18997 (see audit.md F-01)"
+    }
+  },
+  "generated_at_utc": "2026-10-22T08:14:37+00:00"
+}
