@@ -1,0 +1,101 @@
+{
+  "material_id": "mp-18968",
+  "formula": "Li2FeSiO4",
+  "predicted_voltage_V": 3.9168,
+  "voltage_window_Li_per_fu": 2.0,
+  "capacity_mAh_g": 331.3,
+  "capacity_basis": "per gram of the lithiated host formula unit over the host's full lithiation window (0->2 Li/fu; D-005 option A, DECIDED 2026-10-21)",
+  "e_above_hull_eV_atom": 0.0,
+  "run_id": "run-20261030-t008-lfs",
+  "audit_status": "PASS WITH FLAGS",
+  "approved_by": "Mico",
+  "approved_at": "2026-11-02",
+  "disclaimer_version": 1,
+  "citations": [
+    "zhang-2013-lfs",
+    "zhao-2015-silicate-motifs",
+    "nyten-2005-lfs",
+    "mp-database"
+  ],
+  "result_type": "computed estimate",
+  "statement": "Computed estimate from CHGNet v0.3.0 relaxations. Not an experimental measurement; no synthesis, validation, or discovery claim is made.",
+  "d004_comparison": {
+    "decision": "D-004 option A (DECIDED 2026-10-21): beat a named baseline on a single metric",
+    "baseline_material_id": "mp-19017",
+    "baseline_formula": "LiFePO4",
+    "baseline_predicted_voltage_V": 3.4239,
+    "metric": "predicted average voltage over each host's full lithiation window (candidate 0->2 Li/fu, baseline 0->1 Li/fu; V vs Li/Li+), same run, same model and settings",
+    "delta_V": 0.4929,
+    "verdict": "candidate_beats_baseline",
+    "window_convention_note": "each material's voltage spans its own host's full lithiation window; this reproduces the per-material convention T-003/T-004 used and MP's own electrode docs (candidate scout doc: 4.05 V / 331 mAh/g doc-range)"
+  },
+  "stability": {
+    "e_above_hull_eV_atom": 0.0,
+    "unit": "eV/atom",
+    "source": "materials_project (thermo doc, double-queried)",
+    "database_version": "2026.09.28",
+    "d002_band": "within",
+    "baseline_e_above_hull_eV_atom": 0.0,
+    "caveat": "Zero-kelvin computed value (DFT, Materials Project); ignores kinetics and entropy. Says nothing about whether the phase actually forms under real synthesis conditions."
+  },
+  "literature_crosscheck": {
+    "implied_average_low_V": 3.55,
+    "implied_average_high_V": 3.9,
+    "implied_average_basis": "midpoints of the cited plateau pairs: Fe2+/Fe3+ (2.8 V subsequent / 3.1 V first cycle) + Fe3+/Fe4+ (4.3-4.7 V); literature prints no single 0->2 average",
+    "implied_average_citation": "zhang-2013-lfs (plateau pairs as cited therein)",
+    "offset_V_predicted_minus_implied_low": 0.3668,
+    "offset_V_predicted_minus_implied_high": 0.0168,
+    "offset_note": "offset fields = predicted minus implied literature average (3.9168 - 3.55 = +0.3668 V; 3.9168 - 3.9 = +0.0168 V). The predicted voltage sits at/above the top of the plateau-implied band; ideal-limit computed averages vs practical plateaus differ by this class of basis gap (method-notes basis caveat; same class as T-002). The D-007/D-008 chemistry-correlated-offset label does not apply to Fe-redox chemistries (Fe olivine verified within ~0.03 V); this candidate is Fe silicate, and the literature itself offers only plateau pairs here, so no like-for-like absolute offset is claimed.",
+    "ordering_crosscheck": "literature-implied LFS average (~3.55-3.9 V band across plateau pairings) sits above LiFePO4's 3.4-3.45 V plateau, matching the predicted ordering (LFS above LFP, delta +0.4929 V, same run)",
+    "theoretical_capacity_mAh_g": 330,
+    "theoretical_capacity_2nd_source_mAh_g": 331,
+    "capacity_citation": "zhang-2013-lfs (ca. 330 mAh/g, 2 Li/fu); zhao-2015-silicate-motifs (~331 mAh/g); analytic D-005 value 331.3 mAh/g matches both",
+    "practicality_note": "Experiments reach far less than the two-Li theoretical capacity: reversible 130-165 mAh/g typical (zhao-2015-silicate-motifs), ~240 mAh/g initial with fade in later work, and the discovery-era one-Li practical value was 165 mAh/g initial stabilizing ~140 mAh/g at 60 C (nyten-2005-lfs). The Fe2+/Fe3+ plateau also shifts 3.1 -> 2.8 V after the first cycle (attributed in the literature to a structural transformation of the host: zhang-2013-lfs intro; nyten-2005 abstract, 'phase transition to a more stable structure after the first cycle'), and full two-Li extraction faces the Fe3+/Fe4+ plateau at 4.3-4.7 V with large volume changes on full delithiation (zhang-2013-lfs). These are kinetic/structural realities distinct from this zero-kelvin thermodynamic estimate and are not contradicted by it."
+  },
+  "benchmark_gate": {
+    "g1_run": "run-20261021-t003-g1",
+    "g1_verdict": "FAIL (recorded; characterized limitation per D-007/D-008, both DECIDED option A)",
+    "treatment": "benchmark-exempt for this candidate: the D-004 comparison is against the LiFePO4 baseline re-relaxed in the same run with identical settings \u2014 the Fe-redox chemistry whose benchmark error T-003 verified at ~0.03 V \u2014 and the voltage-window convention is stated on both sides; no cross-chemistry absolute comparison is made"
+  },
+  "method": {
+    "model": "CHGNet 0.3.0",
+    "device": "mps",
+    "package_versions": {
+      "pymatgen": "2026.9.24",
+      "mp_api": "0.47.0",
+      "ase": "3.29.0",
+      "chgnet": "0.4.2",
+      "torch": "2.14.1"
+    },
+    "formula_version": "v0.2",
+    "settings": {
+      "model": "CHGNet",
+      "model_version": "0.3.0",
+      "optimizer": "FIRE",
+      "ase_filter": "FrechetCellFilter",
+      "fmax_eV_A": 0.05,
+      "max_steps": 500,
+      "relax_cell": true,
+      "assign_magmoms": true,
+      "device": "mps",
+      "identical_settings_to": "run-20261021-t003-g1",
+      "arrangements_policy": "one arrangement per lithiation state: x_max uses the pulled MP structure as-is; x=0 removes all Li from the same cell (vacancy-ordered framework). RQ-2 cap recorded in manifest: LiFePO4 has 4 Li sites per 4-fu cell (24 orderings); Li2FeSiO4 Pmn2_1 has 8 Li sites per 4-fu cell (2 Li/fu, 8!/(2!^4) = 2520 distinct arrangements by site-occupancy count); this run relaxes 1 per state, same cap as T-003/T-004.",
+      "li_reference": "bcc Li, conventional 2-atom cell a=3.5093 A, relaxed with the same model/optimizer/fmax/cell relaxation. Never a database Li energy (D-rule)."
+    },
+    "arrangements_policy": "one arrangement per lithiation state: x_max uses the pulled MP structure as-is; x=0 removes all Li from the same cell (vacancy-ordered framework). RQ-2 cap recorded in manifest: LiFePO4 has 4 Li sites per 4-fu cell (24 orderings); Li2FeSiO4 Pmn2_1 has 8 Li sites per 4-fu cell (2 Li/fu, 8!/(2!^4) = 2520 distinct arrangements by site-occupancy count); this run relaxes 1 per state, same cap as T-003/T-004.",
+    "rq_flags": {
+      "RQ-2": "arrangement cap: 1 per state (LFS Pmn2_1: 8 Li sites/4-fu cell; LFP: 4 Li sites/4-fu cell)",
+      "RQ-3": "magnetic ordering: CHGNet internal magmom prediction (assign_magmoms=true); no explicit FM/AFM constraint"
+    },
+    "structure_provenance": {
+      "source": "materials_project",
+      "database_version": "2026.09.28",
+      "retrieval_time_utc": "2026-10-30T05:57:15+00:00",
+      "space_group": "Pmn2_1",
+      "atoms_per_cell": 32,
+      "theoretical_or_observed": "theoretical=false (resolved live 2026-10-31 by the G2 audit session's MP query; run-time value UNVERIFIED, sub-endpoint error)",
+      "theoretical_or_observed_source": "G2 audit session, 2026-10-31, mp-api live query of mp-18968 (see audit.md F-02)"
+    }
+  },
+  "generated_at_utc": "2026-10-30T23:42:22+00:00"
+}
