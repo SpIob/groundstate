@@ -10,10 +10,10 @@ status: verified 2026-10-21 (T-002)
 - authors: Materials Project (Lawrence Berkeley National Laboratory)
 - year: UNVERIFIED (ongoing project; founding year not stated on pages opened)
 - identifier: https://next-gen.materialsproject.org ; API https://api.materialsproject.org
-- version: API 0.88.0rc4 (from live openapi.json on 2026-10-21); database release version UNVERIFIED (releases are date-based, e.g. YYYY.MM.DD, per mp-api docs)
-- accessed_at: 2026-10-21
+- version: db 2026.09.28 (client-resolved via mp-api 0.47.0, double-queried live 2026-10-22 in T-004 stage 4 and re-queried independently in the T-006 G2 audit); API 0.88.0rc4 (live openapi.json 2026-10-21); earlier "database release UNVERIFIED" resolved by T-006
+- accessed_at: 2026-10-21 (T-002 terms/API verification); re-verified 2026-10-22 (T-006: live mp-api re-query of mp-18997 at db 2026.09.28 by the producing session and independently by the G2 audit session)
 - verified: true
-- verified_by: Researcher (Hermes), T-002 session — terms page fetched raw, API docs pages opened, live OpenAPI spec read, material pages opened
+- verified_by: Researcher (Hermes), T-002 session — terms page fetched raw, API docs pages opened, live OpenAPI spec read, material pages opened; db release 2026.09.28 confirmed live 2026-10-22 by T-004 stage-4 double query and the T-006 G2 audit's independent re-query (both sessions, mp-api 0.47.0 client-resolved db_version)
 
 ## Question this source was read for
 T-002 criterion 1: confirm what the API exposes, its license and terms, and the official material IDs for the benchmark set.
