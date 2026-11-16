@@ -1,0 +1,136 @@
+{
+  "citations": [
+    {
+      "id": "yamada-2001-lmp",
+      "type": "paper",
+      "title": "Phase Diagram of Lix(MnyFe1-y)PO4 (0 <= x, y <= 1)",
+      "authors": "Atsuo Yamada, Yoshihiro Kudo, Kuang-Yu Liu",
+      "year": 2001,
+      "identifier": "DOI 10.1149/1.1401083",
+      "version": "J. Electrochem. Soc. 148 (10) A1153",
+      "accessed_at": "2026-10-22",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-006 session (live open, HTTP 200, meta tags matched)"
+    },
+    {
+      "id": "zaghib-2013-lmp",
+      "type": "paper",
+      "title": "Advanced Electrodes for High Power Li-ion Batteries",
+      "authors": "Karim Zaghib, Alain Mauger, Henri Groult, John B. Goodenough, Christian M. Julien",
+      "year": 2013,
+      "identifier": "DOI 10.3390/ma6031028",
+      "version": "Materials 2013, 6, 1028 (open access CC BY, PMC5512962)",
+      "accessed_at": "2026-10-22",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-006 session (PMC page opened live, license confirmed CC BY)"
+    },
+    {
+      "id": "mp-database",
+      "type": "database",
+      "title": "Materials Project database and Materials API (MAPI)",
+      "authors": "Materials Project (Lawrence Berkeley National Laboratory)",
+      "year": "UNVERIFIED",
+      "identifier": "https://next-gen.materialsproject.org",
+      "version": "db 2026.09.28 (client-resolved via mp-api 0.47.0, double-queried live)",
+      "accessed_at": "2026-10-21; re-verified 2026-10-22",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-002 session; db release re-verified live in T-004/T-006"
+    },
+    {
+      "id": "zhang-2022-lco",
+      "type": "paper",
+      "title": "High-voltage LiCoO2 cathodes for high-energy-density lithium-ion battery",
+      "authors": "Zhang, J.-C. et al.",
+      "year": 2022,
+      "identifier": "DOI 10.1007/s12598-022-02070-6",
+      "version": "Rare Metals 41:3946-3956 (opened via Wiley)",
+      "accessed_at": "2026-10-21",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-002 session (full text opened via Wiley)"
+    },
+    {
+      "id": "wu-2014-lfp",
+      "type": "paper",
+      "title": "Composites of Graphene and LiFePO4 as Cathode Materials for Lithium-Ion Battery: A Mini-review",
+      "authors": "Wu, Haixia; Liu, Qinjiao; Guo, Shouwu",
+      "year": 2014,
+      "identifier": "DOI 10.1007/s40820-014-0004-6",
+      "version": "Nano-Micro Letters 6(4):316-326",
+      "accessed_at": "2026-10-21",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-002 session (full text opened via PubMed Central and Springer)"
+    },
+    {
+      "id": "huang-2020-lmo",
+      "type": "paper",
+      "title": "Lithium Manganese Spinel Cathodes for Lithium-Ion Batteries",
+      "authors": "Huang, Yimeng et al.",
+      "year": 2020,
+      "identifier": "DOI 10.1002/aenm.202000997",
+      "version": "Advanced Energy Materials 2020, 2000997",
+      "accessed_at": "2026-10-21",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-002 session (opened via doi.org/Wiley; cross-checked OSTI 1775095)"
+    },
+    {
+      "id": "eriksson-2001",
+      "type": "paper",
+      "title": "LiMn2O4 as a Li-Ion Battery Cathode. From Bulk to Electrolyte Interface",
+      "authors": "Eriksson, Tom",
+      "year": 2001,
+      "identifier": "URL https://www.diva-portal.org/smash/get/diva2:160906/FULLTEXT01.pdf",
+      "version": "Acta Universitatis Upsaliensis, Comprehensive Summaries of Uppsala Dissertations 651, ISBN 91-554-5100-4",
+      "accessed_at": "2026-10-21",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-002 session (full PDF text extracted and read)"
+    },
+    {
+      "id": "ong-2011",
+      "type": "paper",
+      "title": "Voltage, stability and diffusion barrier differences between sodium-ion and lithium-ion intercalation materials",
+      "authors": "Ong, Shyue Ping; Chevrier, Vincent L.; Hautier, Geoffroy; Jain, Anubhav; Moore, Charles; Kim, Sangtae; Ma, Xiaohua; Ceder, Gerbrand",
+      "year": 2011,
+      "identifier": "DOI 10.1039/c1ee01782a",
+      "version": "Energy & Environmental Science (PAPER, RSC)",
+      "accessed_at": "2026-10-21",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-002 session (full PDF text extracted and read)"
+    },
+    {
+      "id": "zhang-2013-lfs",
+      "type": "paper",
+      "title": "Insights into electrochemical performance of Li2FeSiO4 from first-principles calculations",
+      "authors": "P. Zhang, Y. Zheng, S. Yu, S.Q. Wu, Y.H. Wen, Z.Z. Zhu, Y. Yang",
+      "year": 2013,
+      "identifier": "DOI 10.1016/j.electacta.2013.07.190",
+      "version": "Electrochimica Acta 111:172-178 (accepted-manuscript full text via ScienceDirect; Crossref identity check)",
+      "accessed_at": "2026-10-30",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-008 session (full text opened live via ScienceDirect PII S0013468613014758; Crossref record matched)"
+    },
+    {
+      "id": "zhao-2015-silicate-motifs",
+      "type": "paper",
+      "title": "Exploration of tetrahedral structures in silicate cathodes using a motif-network scheme",
+      "authors": "Xin Zhao, Shunqing Wu, Xiaobao Lv, Manh Cuong Nguyen, Cai-Zhuang Wang, Zijing Lin, Zi-Zhong Zhu, Kai-Ming Ho",
+      "year": 2015,
+      "identifier": "DOI 10.1038/srep15555",
+      "version": "Scientific Reports 5:15555 (open access, PMC4620437)",
+      "accessed_at": "2026-10-30",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-008 session (PMC page opened live, author list/title/journal/date matched); DOI corrected 2026-10-31 per G2 audit F-01 (recorded srep15635 resolves to an unrelated paper; correct DOI confirmed via PMC JATS XML, EuropePMC, Crossref)"
+    },
+    {
+      "id": "nyten-2005-lfs",
+      "type": "paper",
+      "title": "Electrochemical performance of Li2FeSiO4 as a new Li-battery cathode material",
+      "authors": "Anton Nytén, Ali Abouimrane, Michel B. Armand, Torbjörn Gustafsson, John O. Thomas",
+      "year": 2005,
+      "identifier": "DOI 10.1016/j.elecom.2004.11.008",
+      "version": "Electrochemistry Communications 7(2):156-160 (abstract + metadata via ScienceDirect; Crossref identity check)",
+      "accessed_at": "2026-10-30",
+      "verified": true,
+      "verified_by": "Researcher (Hermes), T-008 session (article page opened live via ScienceDirect PII S1388248104003029; Crossref record matched; full text paywalled — no body-only claim is relied on)"
+    }
+  ]
+}

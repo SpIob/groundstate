@@ -1,0 +1,50 @@
+{
+  "run_id": "run-20261030-t008-lfs",
+  "created_at_utc": "2026-10-30T05:59:28+00:00",
+  "git_sha": "0f121b282ede8e040ece6109a3996f3a6c7850ee",
+  "git_dirty": true,
+  "task": "T-008 (Li2FeSiO4 mp-18968 candidate vs LiFePO4 mp-19017 baseline on voltage; D-004 option A, kickoff 2026-10-30)",
+  "package_versions": {
+    "pymatgen": "2026.9.24",
+    "mp_api": "0.47.0",
+    "ase": "3.29.0",
+    "chgnet": "0.4.2",
+    "torch": "2.14.1"
+  },
+  "model_name": "CHGNet",
+  "model_version": "0.3.0",
+  "device": "mps",
+  "seeds": {
+    "torch_manual_seed": 0,
+    "note": "CHGNet inference is deterministic; seed recorded for completeness"
+  },
+  "input_ids": [
+    "mp-18968",
+    "mp-19017"
+  ],
+  "input_provenance": "pipeline/data/raw/<id>/provenance.json (stage 1, MP db 2026.09.28; mp-18968 pulled 2026-10-30 by stage1_pull_t008.py, named explicitly by Mico at kickoff; mp-19017 pulled by T-003 stage 1)",
+  "settings": {
+    "model": "CHGNet",
+    "model_version": "0.3.0",
+    "optimizer": "FIRE",
+    "ase_filter": "FrechetCellFilter",
+    "fmax_eV_A": 0.05,
+    "max_steps": 500,
+    "relax_cell": true,
+    "assign_magmoms": true,
+    "device": "mps",
+    "identical_settings_to": "run-20261021-t003-g1",
+    "arrangements_policy": "one arrangement per lithiation state: x_max uses the pulled MP structure as-is; x=0 removes all Li from the same cell (vacancy-ordered framework). RQ-2 cap recorded in manifest: LiFePO4 has 4 Li sites per 4-fu cell (24 orderings); Li2FeSiO4 Pmn2_1 has 8 Li sites per 4-fu cell (2 Li/fu, 8!/(2!^4) = 2520 distinct arrangements by site-occupancy count); this run relaxes 1 per state, same cap as T-003/T-004.",
+    "li_reference": "bcc Li, conventional 2-atom cell a=3.5093 A, relaxed with the same model/optimizer/fmax/cell relaxation. Never a database Li energy (D-rule)."
+  },
+  "rq_flags": {
+    "RQ-2": "arrangement cap: 1 per state (LFS Pmn2_1: 8 Li sites/4-fu cell; LFP: 4 Li sites/4-fu cell)",
+    "RQ-3": "magnetic ordering: CHGNet internal magmom prediction (assign_magmoms=true); no explicit FM/AFM constraint"
+  },
+  "comparison": {
+    "candidate": "mp-18968 Li2FeSiO4",
+    "baseline": "mp-19017 LiFePO4",
+    "metric": "predicted average voltage, full lithiation window of the host formula unit (D-004 option A; LFS window is 0->2 Li/fu, LFP 0->1 Li/fu)",
+    "baseline_run_value_ref": "run-20261021-t003-g1 predicted 3.4239 V (0->1 window); this run re-relaxes the baseline for a within-run comparison"
+  }
+}
