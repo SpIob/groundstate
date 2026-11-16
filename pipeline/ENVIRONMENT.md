@@ -9,7 +9,7 @@ Created 2026-10-20 (macOS 26.4, Apple M5, arm64) by Hermes for task T-001.
 - **CHGNet device:** `mps` (Apple GPU) — verified; the load message prints "CHGNet will run on mps"
 - **torch:** 2.14.1 (MPS build), **numpy:** 2.5.4
 
-## Direct dependencies (the only four allowed)
+## Direct dependencies (the only five allowed)
 
 | package | version |
 |---|---|
@@ -17,6 +17,11 @@ Created 2026-10-20 (macOS 26.4, Apple M5, arm64) by Hermes for task T-001.
 | mp-api | 0.47.0 |
 | ase | 3.29.0 |
 | chgnet | 0.4.2 |
+| jsonschema | 4.26.0 |
+
+`jsonschema` added 2026-10-27 (Mico-authorized) for T-005's artifact validation
+(`pipeline/src/groundstate/validate_results.py`); brings `jsonschema-specifications`
+and `referencing` (rpds-py already present via pymatgen). Freeze: 83 packages.
 
 Full transitive freeze at creation time (78 packages):
 

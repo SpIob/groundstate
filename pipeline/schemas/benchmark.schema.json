@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "benchmark.json (per benchmark run, in pipeline/runs/<run-id>/)",
+  "description": "Gate G1 artifact. required = the fields docs/DATA_CONTRACT.md lists; settings, gate, ordering_details, flags, verdict_rationale and the per-material enrichment are recorded but optional. The contract defines verdict as pass | fail | measurement_only; a FAIL verdict is a valid, expected outcome (the gate did its job, per D-007).",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-"
+    },
+    "settings": {
+      "type": "object"
+    },
+    "gate": {
+      "type": "object"
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "material_id": {
+            "type": "string",
+            "pattern": "^mp-"
+          },
+          "formula": {
+            "type": "string",
+            "minLength": 1
+          },
+          "predicted_V": {
+            "type": "number"
+          },
+          "reference_V": {
+            "type": "number"
+          },
+          "diff_V": {
+            "type": "number"
+          },
+          "reference_citation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference_basis": {
+            "type": "string"
+          },
+          "within_gate": {
+            "type": "boolean"
+          },
+          "predicted_capacity_mAh_g": {
+            "type": "number"
+          },
+          "reference_capacity_mAh_g": {
+            "type": "number"
+          },
+          "capacity_diff_mAh_g": {
+            "type": "number"
+          },
+          "capacity_mass_basis": {
+            "type": "string"
+          },
+          "mp_computed_reference_V": {
+            "type": "number"
+          },
+          "mp_computed_diff_V": {
+            "type": "number"
+          },
+          "mp_reference_source": {
+            "type": "string"
+          },
+          "e_above_hull_eV_atom": {
+            "type": "number"
+          },
+          "converged": {
+            "type": "boolean"
+          },
+          "arrangement_ids": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "material_id",
+          "formula",
+          "predicted_V",
+          "reference_V",
+          "diff_V",
+          "reference_citation_id",
+          "within_gate"
+        ]
+      }
+    },
+    "ordering_match": {
+      "type": "boolean"
+    },
+    "ordering_details": {
+      "type": "object"
+    },
+    "verdict": {
+      "enum": [
+        "pass",
+        "fail",
+        "measurement_only"
+      ]
+    },
+    "verdict_rationale": {
+      "type": "string"
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "run_id",
+    "settings",
+    "materials",
+    "ordering_match",
+    "verdict"
+  ]
+}

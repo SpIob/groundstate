@@ -8,4 +8,5 @@ dependencies = [
     "mp-api",
     "ase",
     "chgnet",
+    "jsonschema",
 ]

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "stability-index.json (per run, run-level summary of stage-4 outputs)",
+  "description": "Not in docs/DATA_CONTRACT.md; codified in T-005 because it is a real shape in every run folder (run_id, per-material hull values, db version, retrieval date). Values are per-material energy above hull in eV/atom.",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-"
+    },
+    "materials": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "const": "UNVERIFIED"
+          }
+        ]
+      },
+      "propertyNames": {
+        "pattern": "^mp-"
+      }
+    },
+    "database_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retrieval_date": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "run_id",
+    "materials",
+    "database_version",
+    "retrieval_date"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "manifest.json (per run, in pipeline/runs/<run-id>/)",
+  "description": "The only tracked file per run; must be enough to reproduce the run. required = the fields docs/DATA_CONTRACT.md lists; task, git_dirty, input_provenance, settings, rq_flags and comparison are recorded enrichment. git_dirty true is legal at run time; the promotion commit records the clean sha.",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-"
+    },
+    "git_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "git_dirty": {
+      "type": "boolean"
+    },
+    "task": {
+      "type": "string"
+    },
+    "package_versions": {
+      "type": "object"
+    },
+    "model_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "device": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seeds": {
+      "type": "object"
+    },
+    "input_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "input_provenance": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "object"
+    },
+    "rq_flags": {
+      "type": "object"
+    },
+    "comparison": {
+      "type": "object"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "run_id",
+    "git_sha",
+    "package_versions",
+    "model_name",
+    "model_version",
+    "device",
+    "seeds",
+    "input_ids",
+    "created_at_utc"
+  ]
+}

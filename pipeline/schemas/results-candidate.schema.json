@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "results/candidates/<id>.json (public-facing, post-promotion)",
+  "description": "One promoted candidate record. required = the fields docs/DATA_CONTRACT.md lists for this shape, plus result_type and statement (evidence-rule essentials: the 'computed estimate' wording must survive promotion). Audit-driven enrichment stays legal: additionalProperties is true, so fields the G2 audit added (capacity_basis, d004_comparison, stability, literature_crosscheck, benchmark_gate, method, generated_at_utc, ...) are allowed but never required. D-006 (option C; sequence noted 2026-10-29): e_above_hull_eV_atom is MP's number when available, else the literal 'UNVERIFIED' gap — and in the gap form d006_gap_reason (what was searched, why no MP value) is required so the public record stays self-explanatory. A gap triggers D-006 option B's revisit condition; no CHGNet/DFT hull mixing.",
+  "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "e_above_hull_eV_atom": {
+            "const": "UNVERIFIED"
+          }
+        },
+        "required": [
+          "e_above_hull_eV_atom"
+        ]
+      },
+      "then": {
+        "properties": {
+          "d006_status": {
+            "const": "unverified_gap"
+          },
+          "d006_gap_reason": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "d006_status",
+          "d006_gap_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "e_above_hull_eV_atom": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "e_above_hull_eV_atom"
+        ]
+      },
+      "then": {
+        "properties": {
+          "d006_status": {
+            "const": "mp_value"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "material_id": {
+      "type": "string",
+      "pattern": "^mp-"
+    },
+    "formula": {
+      "type": "string",
+      "minLength": 1
+    },
+    "predicted_voltage_V": {
+      "type": "number"
+    },
+    "capacity_mAh_g": {
+      "type": "number"
+    },
+    "capacity_basis": {
+      "type": "string"
+    },
+    "e_above_hull_eV_atom": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "const": "UNVERIFIED"
+        }
+      ]
+    },
+    "d006_status": {
+      "enum": [
+        "mp_value",
+        "unverified_gap"
+      ]
+    },
+    "d006_gap_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-"
+    },
+    "audit_status": {
+      "enum": [
+        "PASS",
+        "PASS WITH FLAGS",
+        "FAIL"
+      ]
+    },
+    "approved_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approved_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "disclaimer_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "result_type": {
+      "const": "computed estimate"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at_utc": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "material_id",
+    "formula",
+    "predicted_voltage_V",
+    "capacity_mAh_g",
+    "e_above_hull_eV_atom",
+    "run_id",
+    "audit_status",
+    "approved_by",
+    "approved_at",
+    "disclaimer_version",
+    "citations",
+    "result_type",
+    "statement"
+  ]
+}

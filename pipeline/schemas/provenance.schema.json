@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "provenance.json (per candidate, in pipeline/data/raw/<id>/)",
+  "description": "Stage-1 pull record. required = the fields docs/DATA_CONTRACT.md lists; the theoretical_or_observed field may hold the literal 'UNVERIFIED' (that spelling is the contract's own explicit-gap convention). Pick-rule and polymorph-listing fields are recorded enrichment.",
+  "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "energy_above_hull_eV_atom_as_reported": {
+            "const": "UNVERIFIED"
+          }
+        },
+        "required": [
+          "energy_above_hull_eV_atom_as_reported"
+        ]
+      },
+      "then": {
+        "properties": {
+          "d006_status": {
+            "const": "unverified_gap"
+          },
+          "d006_gap_reason": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "d006_status",
+          "d006_gap_reason"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "material_id": {
+      "type": "string",
+      "pattern": "^mp-"
+    },
+    "formula": {
+      "type": "string",
+      "minLength": 1
+    },
+    "space_group": {
+      "type": "string"
+    },
+    "space_group_number": {
+      "type": "integer"
+    },
+    "atoms_per_cell": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source": {
+      "enum": [
+        "materials_project",
+        "literature"
+      ]
+    },
+    "database_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retrieval_time_utc": {
+      "type": "string",
+      "minLength": 1
+    },
+    "client_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "query": {
+      "type": "string",
+      "minLength": 1
+    },
+    "theoretical_or_observed": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "minLength": 1
+    },
+    "d006_status": {
+      "enum": [
+        "mp_value",
+        "unverified_gap"
+      ]
+    },
+    "d006_gap_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "citation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "energy_above_hull_eV_atom_as_reported": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "const": "UNVERIFIED"
+        }
+      ]
+    },
+    "structure_file": {
+      "type": "string"
+    },
+    "candidate_for": {
+      "type": "string"
+    },
+    "polymorph_pick_rule": {
+      "type": "string"
+    },
+    "n_polymorphs_listed": {
+      "type": "integer"
+    },
+    "polymorph_listing_file": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "material_id",
+    "formula",
+    "space_group",
+    "atoms_per_cell",
+    "source",
+    "database_version",
+    "retrieval_time_utc",
+    "client_version",
+    "query",
+    "theoretical_or_observed"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "derived.json (per run)",
+  "description": "Stage-3 voltages/capacities. required = the fields docs/DATA_CONTRACT.md lists. The contract predates D-005's decision, so BOTH capacity spellings are legal inside pairs: the T-003 benchmark run records capacity_mAh_g_lithiated_basis + capacity_mAh_g_delithiated_basis, while a post-D-005 run records the single capacity_mAh_g with mass_basis. Exactly one of the two forms must be present per pair (enforced by the validator's cross-checks, since JSON Schema if/then/else across such variants is brittle here); the schema itself accepts the union.",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-"
+    },
+    "formula_version": {
+      "type": "string",
+      "pattern": "^v"
+    },
+    "e_li_reference": {
+      "type": "object"
+    },
+    "d005_status": {
+      "type": "string"
+    },
+    "d004_comparison": {
+      "type": "object"
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "material_tag": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "candidate",
+              "baseline",
+              "benchmark"
+            ]
+          },
+          "pairs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "x1": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "x2": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "voltage_V": {
+                  "type": "number"
+                },
+                "capacity_mAh_g": {
+                  "type": "number"
+                },
+                "capacity_mAh_g_lithiated_basis": {
+                  "type": "number"
+                },
+                "capacity_mAh_g_delithiated_basis": {
+                  "type": "number"
+                },
+                "mass_basis": {
+                  "type": "string"
+                },
+                "mass_basis_benchmark_comparison": {
+                  "type": "string"
+                },
+                "molar_mass_g_mol": {
+                  "type": "number"
+                },
+                "arrangement_ids": {
+                  "type": "object"
+                },
+                "label": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "candidate_id",
+          "pairs"
+        ]
+      }
+    }
+  },
+  "required": [
+    "run_id",
+    "formula_version",
+    "materials"
+  ]
+}

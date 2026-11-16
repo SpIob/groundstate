@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "results/index.json",
+  "description": "Index of promoted results. benchmark_run_id is null until a benchmark run itself is promoted; ids in candidates must exist under results/candidates/ (checked by the validator, not expressible in JSON Schema alone).",
+  "type": "object",
+  "properties": {
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^mp-"
+      }
+    },
+    "benchmark_run_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^run-"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "updated_at_utc": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "candidates",
+    "benchmark_run_id",
+    "updated_at_utc"
+  ]
+}

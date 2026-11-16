@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "stability.json (per candidate, stage-4 output)",
+  "description": "Energy above hull record per gs-stability-score and D-006 (DECIDED 2026-10-27, option C; operating sequence noted by Mico 2026-10-29). Materials Project's value when the material is in MP's dataset. Otherwise the explicit UNVERIFIED gap — never a CHGNet or mixed CHGNet/DFT hull number: e_above_hull_eV_atom = 'UNVERIFIED', d006_status = 'unverified_gap', d006_gap_reason stating what was searched and not found, source = 'unverified_materials_project_miss'. A gap is a trigger: it fires D-006 option B's revisit condition — stop and tell Mico before any CHGNet-referenced hull work starts. required = the fields docs/DATA_CONTRACT.md lists; d006_* fields are required only in the gap form, so every as-run MP-numbered record (which carries no d006_status) stays valid; double-query and band fields are recorded enrichment.",
+  "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "e_above_hull_eV_atom": {
+            "const": "UNVERIFIED"
+          }
+        },
+        "required": [
+          "e_above_hull_eV_atom"
+        ]
+      },
+      "then": {
+        "properties": {
+          "d006_status": {
+            "const": "unverified_gap"
+          },
+          "d006_gap_reason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "source": {
+            "const": "unverified_materials_project_miss"
+          }
+        },
+        "required": [
+          "d006_status",
+          "d006_gap_reason",
+          "source"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "e_above_hull_eV_atom": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "e_above_hull_eV_atom"
+        ]
+      },
+      "then": {
+        "properties": {
+          "d006_status": {
+            "const": "mp_value"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "material_id": {
+      "type": "string",
+      "pattern": "^mp-"
+    },
+    "formula": {
+      "type": "string"
+    },
+    "e_above_hull_eV_atom": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "const": "UNVERIFIED"
+        }
+      ]
+    },
+    "d006_status": {
+      "enum": [
+        "mp_value",
+        "unverified_gap"
+      ]
+    },
+    "d006_gap_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thermo_type": {
+      "type": "string"
+    },
+    "unit": {
+      "const": "eV/atom"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "database_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retrieval_date": {
+      "type": "string",
+      "minLength": 1
+    },
+    "second_query_value": {
+      "type": "number"
+    },
+    "second_query_match": {
+      "type": "boolean"
+    },
+    "stage1_provenance_value": {
+      "type": "number"
+    },
+    "alternate_thermo_values": {
+      "type": "object"
+    },
+    "competing_phases": {
+      "type": [
+        "string",
+        "array"
+      ]
+    },
+    "d002_band_0_25_meV": {
+      "type": "string"
+    },
+    "baseline_reference": {
+      "type": "object"
+    },
+    "caveat": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "material_id",
+    "e_above_hull_eV_atom",
+    "unit",
+    "source",
+    "database_version",
+    "retrieval_date",
+    "caveat"
+  ]
+}
