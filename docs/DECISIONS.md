@@ -55,13 +55,15 @@ Recommendation: A. Confirmed by Mico 2026-10-21 — no further action.
 ---
 
 ## D-006: Hull-mixing rule
-**Status: OPEN.** Materials Project's energy-above-hull is computed from its own DFT dataset. CHGNet (used for the actual screening in stages 2-3) produces energies on a different footing. Mixing the two without a stated rule risks a hull value that looks precise but isn't apples-to-apples.
+**Status: DECIDED (Mico, 2026-10-27): Option C — report Materials Project's value when available; candidates outside Materials Project's dataset carry an explicit "UNVERIFIED" gap instead of a computed number.** Materials Project's energy-above-hull is computed from its own DFT dataset. CHGNet (used for the actual screening in stages 2-3) produces energies on a different footing. Mixing the two without a stated rule risks a hull value that looks precise but isn't apples-to-apples.
 
 - **A — Use Materials Project's own energy-above-hull as-is, for benchmark and known materials only:** Simple, defensible, no new hull math. Doesn't cover any candidate the pipeline finds that isn't already in Materials Project's dataset.
 - **B — Build a CHGNet-referenced hull:** Recompute a formation-energy hull using CHGNet energies throughout (candidates and competing phases alike), so everything is internally consistent even for materials not in Materials Project's own hull. More work, and needs its own validation against the benchmark set before it's trusted.
 - **C — Report Materials Project's value when available, flag `UNVERIFIED` otherwise:** Middle ground. No new hull-building now; candidates outside Materials Project's dataset get an explicit gap instead of a fabricated-looking number.
 
-Recommendation: start with C, revisit B once the pipeline needs to screen materials Materials Project hasn't already characterized.
+Decided: C (Mico, 2026-10-27, in session during T-005). Revisit B once the pipeline needs to screen materials Materials Project hasn't already characterized; until then no CHGNet/DFT hull mixing anywhere in the pipeline.
+
+Operating sequence (noted by Mico, 2026-10-29): option C stays the operating mode — stage 4 reports MP's hull value whenever the material is in MP's dataset, and an explicit `UNVERIFIED` gap otherwise. The gap is also the tripwire: the first stage-4 record whose MP value is unavailable fires option B's revisit condition, and the agent stops and presents the option-B plan (CHGNet-referenced hull throughout, validated against the benchmark set before trusted) before any hull-building work starts. Option B is never mixed in silently. The two forms are machine-enforced in `pipeline/schemas/` and `pipeline/src/groundstate/validate_results.py` (T-007, 2026-10-29).
 
 ---
 
@@ -80,5 +82,87 @@ If A: T-003 can close as Done with verdict FAIL recorded (the gate ran, the resu
 
 ---
 
+## D-009: Hosting target
+**Status: DECIDED (Mico, 2026-10-22): Option B — Vercel.** Static `dist/` only, hash routes, so either works. Limits below are from memory and **UNVERIFIED**; `gs-web-deploy` opens the host's terms page and records them before any deploy.
+
+- **A — GitHub Pages:** Repo is already on GitHub. Deploy is a workflow file in the repo. Custom domain through a `CNAME` file. Free for public repositories as I understand it. Fewer moving parts and one account.
+- **B — Vercel:** Also free at the hobby level as I understand it, with preview deploys per push. A second account and dashboard to manage, and its free tier is written for personal non-commercial use, so check that against how Athena Studio is connected to the site.
+
+Blocks: W-010 (deploy) only.
+
+---
+
+## D-010: Site font
+**Status: DECIDED (Mico, 2026-10-22): Option D — find the original Dot Mincho 16 release.** The wireframe font is Canva's `DotMincho16Std`, a 16 px dot-matrix serif. Its web license is unknown, so it cannot be used as is. All licenses below are **UNVERIFIED** until Hermes opens the source (`gs-web-assets`). The wordmark and logo are images, so this choice does not affect them. Whatever is chosen must contain `← → › ‹ |`, or those glyphs become pixel SVGs.
+
+- **A — DotGothic16:** Same family of idea (16 px dot-matrix, Latin glyphs), sans instead of serif. Closest to the pixel-art logo. Likely an open license.
+- **B — Courier Prime or Cutive Mono:** Typewriter slab-serif monospace. Closest to the wireframe's serif silhouette and very cozy, but smooth outlines instead of pixels.
+- **C — VT323:** The most literal CRT-terminal look. Thin at body size, so long paragraphs read harder.
+- **D — Find the original Dot Mincho 16 release:** Exact match if a standalone release exists and allows web self-hosting. Needs a license search first.
+
+Until a standalone, self-hostable release is found and its license is opened (`gs-web-assets`), builds use a system monospace fallback and are marked `font: provisional`. If the search finds no such release, stop and report back to Mico before falling back to A, B, or C. Blocks: final visual pass and deploy, not page building.
+
+---
+
+## D-011: Palette contrast
+**Status: DECIDED (Mico, 2026-10-22): Option B — darker text tokens, same hues.** Measured from the wireframe (WCAG contrast ratios): green nav and titles on paper 3.15, orange labels 2.17, gray labels 2.32, paper-colored text on the green panel 3.3, on the orange panel 2.05, on gray 2.32, and orange "Electrolytes" on the green flyout 1.45. Dimmed rows fall to about 1.3. Body text is fine (black on paper, 20.0). Small text needs 4.5 to be comfortable for most readers.
+
+- **A — Exact wireframe colors:** Looks exactly as drawn. Small text in green, orange, and gray is hard to read for many people. The check script reports every failing pair but does not block the build.
+- **B — Darker text tokens, same hues:** Green text `#3a8045` (4.6), orange text `#b0541a` (4.85), gray text `#6f6f6f` (4.79). Fills and the rail keep the wireframe colors. Rows are not dimmed; the selected row is marked by `‹` and an underline. Very close visually, passes AA for text.
+- **B2 — B plus ink-green text on the orange and gray panels:** Text inside those panels becomes `#083529` (6.3 on orange, 5.56 on gray) instead of paper-colored. Passes everywhere, but the panels look less airy than drawn.
+
+Decided option B: text uses `--green-text #3a8045`, `--orange-text #b0541a`, `--gray-text #6f6f6f`; fills and the rail keep the wireframe colors; rows are not dimmed — the selected row is marked by `‹` and an underline. B2 is not used. The set-A default above is superseded. Blocks: nothing; it is a one-file token switch.
+
+---
+
+## D-011 Amendment (Mico, 2026-10-29): Panel text and icons use --ink-green
+**Status: DECIDED.** Supersedes the panel-text portion of option B above. Text and icons placed on the colored fills (green, orange, gray panels) render in `--ink-green` (`#083529`) instead of `--paper`. The fills themselves do not change. This covers panel body text, panel headings, links and underlines inside panels, the Cathodes/Electrolytes sub-nav inside its green sub-panel, and the pixel icons on the panels.
+
+Measured contrast ratios (from token values):
+- Ink-green on green fill: `#083529` on `#4f9e58` = 4.10:1 — **below 4.5**, listed as known residual; not "large text" (font-size < 24px / not 18.66px bold). [Corrected 2026-11-02 per Mico's W-002 delta-audit disposition: the recorded 4.16 was inaccurate — the value recomputable from the token hexes is 4.10 (recomputed twice, independently, in the 2026-10-30 delta audit); the amendment itself stands unchanged.]
+- Ink-green on orange fill: `#083529` on `#f29d64` = 6.24:1 — passes.
+- Ink-green on gray fill: `#083529` on `#a6a6a6` = 5.56:1 — passes.
+
+Implementation: token system only (no hardcoded hex). `tokens.css` gains `--panel-text: var(--ink-green)` and panel styles reference it. Any future "large text" exemption in an audit must show the computed font size meeting WCAG definition (24px, or 18.66px bold).
+
+---
+
+## D-012: Cathodes panel structure and table columns
+**Status: DECIDED (Mico, 2026-10-22): Option A — full columns, stacked sections.** The wireframe shows an intro paragraph and an empty 3-column table. `DATA_CONTRACT.md` has more fields than three columns hold, and Mico's v3 note puts Method and Benchmark inside the panel.
+
+- **A — Full columns, stacked sections:** Intro, Benchmark, Candidates, Method, closing line. Candidates table shows formula, material id, voltage, capacity, energy above hull, audit status, citations. Complete, wide, scrolls sideways on small screens. This is the default in `PAGES.md`.
+- **B — Three columns as drawn:** Material, Result (voltage, capacity, hull in one cell), Evidence (audit status and citations). Matches the wireframe, but packs numbers together and is harder to scan.
+- **C — Three columns plus row expand:** Same as B, selecting a row reveals the full record under it. Instant, no animation. More clicks, but compact.
+
+Blocks: `gs-web-data-view` only.
+
+---
+
+## D-008: Voltage offset seen on Mn-olivine too — scope of the D-007 limitation (PROPOSED by Runner session, 2026-10-22, task T-004)
+**Status: DECIDED (Mico, 2026-10-22): Option A — record as a characterized limitation.** The limitation text in `references/science/method-notes.md` is extended to cover Mn olivine: chemistry-correlated offsets up to ~0.4–0.5 V seen on layered Co oxides AND Mn olivine; Fe olivine and Mn spinel verified within ~0.03 V; relative rankings within one chemistry usable, absolute cross-chemistry comparisons not. No method change, no rerun; candidate reports carry the offset context. Option B's investigation may become a future RQ-4 task once several candidates exist and the offset pattern is better sampled.
+
+T-004's candidate run (run-20261022-t004-lmp) predicts olivine LiMnPO4 (mp-18997) at 3.6865 V, while the literature Mn3+/Mn2+ plateau is ~4.1 V (multiple open web sources this session; to be written up as a `/gs-lit-note` in the candidate's stage-5 pass, not yet a verified citation). The relative result — LiMnPO4 above LiFePO4 — matches the literature ordering, and stability is exactly equal (both 0.0 meV/atom). But the absolute offset, −0.41 V, is nearly the size of LiCoO2's −0.41 V from T-003. D-007's wording ("polyanionic Fe and spinel Mn verified within ~0.03 V") implicitly treated the offset as a layered-Co-oxide problem; T-004 shows a polyanionic Mn chemistry carries it too. The D-004 within-chemistry comparison is unaffected: candidate and baseline share the olivine structure, model, and settings.
+
+- **A — Record as a characterized limitation (recommended):** Extend the method-notes limitation text to "chemistry-correlated offsets up to ~0.4–0.5 V seen on layered Co oxides AND Mn olivine; Fe olivine and Mn spinel verified within ~0.03 V; relative rankings within one chemistry usable; absolute cross-chemistry comparisons not." No method change, no rerun; candidate reports carry the offset context.
+- **B — Investigate before more candidates (would become RQ-4):** e.g. spin/magnetic-ordering treatment for Mn2+/Mn3+ (CHGNet magmoms) or per-chemistry calibration. Only path to restored absolute accuracy, but a method change that invalidates current outputs until G1 reruns.
+- **C — Widen the D-003 gate:** Recommended against, same reasoning as D-007 option C.
+
+Recommendation: A now; keep B in mind as a future RQ-4 task once several candidates exist and the offset pattern is better sampled.
+
+---
+
 ## Adding a decision
 New fork → append a `D-0XX` section here in this same shape: status, context, lettered options with real trade-offs, a recommendation if there's a clear one. An agent proposes; only Mico decides.
+
+---
+
+## D-013: When does M5 (the website) open?
+**Status: DECIDED (Mico, 2026-10-22): Option A — keep the order; M5 opens after M4 closes.** `web/` stays frozen until the first non-benchmark candidate is screened, audited, and promoted to `results/`, so the site builds against a settled data shape.
+
+- **A — Keep the order (open M5 after M4):** The site launches showing real data. No UI work gets thrown away if the data shape shifts. Nothing visible exists until the pipeline works.
+- **B — Open M5 now, build everything:** Parallel progress, and the site can be reviewed early with honest empty states. Risk: the data contract is still draft and schemas (T-005) are not written, so the data panel may need rework. Two agent roles running at once also uses more of the free-tier quota.
+- **C — Open a shell-only slice now:** Landing, About, Contacts, Disclaimer, and the Explore shell with the planned and exploring panels need no pipeline data. Defer `gs-web-data-view` until M4. Gets most of the look done early, keeps the data work in its original order.
+
+Blocks: W-002 onward until M4 closes and M5 opens (`docs/ROADMAP.md` M5 row).
+
+Numbering note: this question was drafted as D-008 alongside the website fork's specs, but the T-004 Mn-olivine proposal took D-008 first (recorded in `tasks/BOARD.md` and `docs/WORKLOG.md` on 2026-10-22), so it renumbers to D-013 and every reference to it is updated. Only Mico renumbers or retires decision numbers.

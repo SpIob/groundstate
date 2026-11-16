@@ -23,6 +23,7 @@ __pycache__/
 # node
 node_modules/
 dist/
+web/public/data/
 
 # pipeline scratch: raw and intermediate data stay local
 pipeline/data/raw/*
