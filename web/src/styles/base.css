@@ -1,0 +1,74 @@
+/* Base look. Tokens only - no color literals here (see tokens.css). */
+
+/* The one site font, self-hosted (DESIGN.md section 3; D-010 option D).
+   W-003 2026-11-17: JF Dot Shinonome Mincho 16, public domain; license
+   record beside the file in public/fonts/. Subset covers Latin plus the
+   arrows; the chevrons are missing from the font and are drawn as pixel
+   SVGs instead (DESIGN.md section 3). */
+@font-face {
+  font-family: "JF Dot Shinonome Mincho 16";
+  src: url("/fonts/dot-shinonome-mincho-16.subset.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  /* Type scale (Mico, 2026-11-17: "text across the whole page" should be
+     bigger): 24px = 1.5 design px = 3 whole device px on 2x displays, so
+     glyphs stay pixel-crisp on the owner's MacBook while reading larger.
+     Titles keep 32. */
+  font-size: 24px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--green-text);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+/* D-011 disposition, audit flag 1 (2026-10-29): outline on EVERY focus path.
+   :focus-visible alone left programmatic focus resolving outline-color to
+   currentcolor (--green-text); :focus covers all paths. Colors verified in a
+   real browser: rgb(8, 53, 41) = --ink-green. */
+a:focus {
+  outline: 2px solid var(--ink-green);
+  outline-offset: 2px;
+}
+
+/* Scrollbar: paper thumb on ink-green track (DESIGN.md section 5). */
+* {
+  scrollbar-color: var(--paper) var(--ink-green);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.justified {
+  text-align: justify;
+}

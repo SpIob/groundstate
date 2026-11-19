@@ -1,0 +1,33 @@
+JF Dot Shinonome Mincho 16 — license record
+============================================
+
+Font family (from the font's own name table): JF Dot Shinonome Mincho 16
+Subfamily: Regular
+Manufacturer (name table): The Electronic Font Open Laboratory (/efont/)
+Source file supplied by Mico (site owner) as docs/web/design/assets-src/dot-mincho-16.ttf
+   on 2026-11-17; file mtime 2015-05-27, 1,958,568 bytes.
+Shipped here as: dot-shinonome-mincho-16.subset.woff2 (subset to ASCII + U+2190 + U+2192,
+   bitmap-strike and hinting tables dropped; produced 2026-11-17 with fontTools/pyftsubset
+   4.60.2 + brotli 1.2.1).
+
+LICENSE: Public Domain.
+
+Evidence trail (all opened 2026-11-17):
+1. The font file's own name table, nameID 13 (license description), reads:
+   "Public Domain. AUTHORS Public Domain."
+2. The /efont/ Electronic Font Open Laboratory project page for the Shinonome font
+   family (http://openlab.jp/efont/shinonome), opened live 2026-11-17 via web search,
+   states: "These fonts are in Public Domain. Share and Enjoy."
+3. Japanese Wikipedia, 東雲フォント (Shinonome font): license "Public Domain".
+4. Gentoo package media-fonts/shinonome: License "public-domain".
+5. Mico, the site owner, confirmed a web-usable license for this font file in chat on
+   2026-11-17 (task W-003 intake; recorded in docs/WORKLOG.md).
+
+Public-domain dedication: the font may be used, copied, modified, self-hosted and
+redistributed without restriction. No attribution is required by the license; the
+provenance above is recorded anyway per the project's citation standard.
+
+Note: this is the Shinonome 16-dot Mincho, the public-domain Japanese bitmap font
+family originally by Yasuyuki Furukawa, maintained by /efont/ (release 0.9.11, 2004).
+It is NOT Canva's commercial "DotMincho16Std" used to draw the wireframe PDF — that
+font's web license is unknown and it is never extracted or shipped (DESIGN.md section 3).

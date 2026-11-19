@@ -1,0 +1,28 @@
+# links.allow.txt - every outbound URL allowed in dist/ (DESIGN.md R5).
+# One URL per line, exact match (no wildcards). Maintained by hand; audited at
+# gate W2. Add a URL only when copy or code genuinely needs it.
+#
+# The first five entries ship inside React's runtime bundle as string
+# constants: the W3C namespace identifiers are XML/SVG attribute namespace
+# URIs (specification identifiers, never fetched at runtime), and
+# https://react.dev/errors/ appears only in React's development error
+# messages (a human-readable link inside error text, not a runtime request).
+http://www.w3.org/1998/Math/MathML
+http://www.w3.org/1999/xlink
+http://www.w3.org/2000/svg
+http://www.w3.org/XML/1998/namespace
+https://react.dev/errors/
+# Outbound citation URLs shipped in results/ data (allowed by R5: outbound
+# links in citations; each verified when its citation note was written).
+https://next-gen.materialsproject.org
+https://www.diva-portal.org/smash/get/diva2:160906/FULLTEXT01.pdf
+# Font license record (public/fonts/LICENSE-*.txt, copied to dist/): the
+# /efont/ Shinonome project page cited as public-domain evidence. Prose-only
+# reference in a text file, never fetched at runtime (W-003, 2026-11-17).
+http://openlab.jp/efont/shinonome
+# Mico's favicon.svg (public/favicon.svg, W-003) carries two never-fetched
+# markup identifiers: the SVG 1.1 DOCTYPE system identifier written by his
+# export, and the xmlns:affinity namespace his exporter declares. Identifiers
+# inside XML markup, same class as the W3C namespace URIs above.
+http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd
+https://www.affinity.studio/

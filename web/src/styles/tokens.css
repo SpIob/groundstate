@@ -1,0 +1,36 @@
+/*
+  Design tokens - the ONLY file in web/ allowed to contain color literals.
+  Source: docs/web/DESIGN.md section 2.
+  D-011 DECIDED 2026-10-22, option B: text uses the set B tokens; fills, rail,
+  and backgrounds keep set A. No dimming: the --dim-* tokens are unused (kept
+  so a future change stays a one-file change).
+*/
+:root {
+  --paper: #f9faf5;
+  --green: #4f9e58;
+  --green-text: #3a8045;
+  --ink-green: #083529;
+  --ink: #000000;
+  --orange: #f29d64;
+  --orange-text: #b0541a;
+  --gray: #a6a6a6;
+  --gray-text: #6f6f6f;
+  --dim-green: #8bbe90;
+  --dim-orange: #f6dbc5;
+  --dim-gray: #dfe0dd;
+
+  /* D-011 amendment (Mico, 2026-10-29): text and icons on the colored panel
+     fills render in --ink-green, not --paper. Fills keep the wireframe (set A)
+     colors. Measured contrast: 4.16:1 on --green (known residual, below 4.5,
+     recorded in DECISIONS.md), 6.24:1 on --orange, 5.56:1 on --gray. */
+  --panel-text: var(--ink-green);
+
+  /*
+    D-010 DECIDED 2026-10-22, option D, satisfied by W-003 (2026-11-17): the
+    owner supplied the 16-dot Mincho file he holds a web-usable license to
+    (JF Dot Shinonome Mincho 16, Public Domain - license record beside the
+    subset in public/fonts/). Self-hosted woff2, font-display swap; the stack
+    keeps the monospace fallback behind the webfont. One family token (R4).
+  */
+  --font: "JF Dot Shinonome Mincho 16", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

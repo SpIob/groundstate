@@ -1,0 +1,165 @@
+/* Page layout. Fluid, centered (DESIGN.md section 4). Mico, 2026-11-17:
+   contents should fill the screen a bit more - shell cap raised 1200 -> 1400
+   (owner-directed adjustment of the section 4 value). */
+.shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.top-nav {
+  padding: 10px 0;
+  font-size: 24px;
+}
+
+.top-nav a {
+  color: var(--green-text);
+  text-transform: uppercase;
+}
+
+.top-nav .nav-sep {
+  color: var(--green-text);
+}
+
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 8% 0 4% 4.4%;
+  /* Grid rule (Mico, 2026-11-17): multiples of the font's 16px design grid. */
+  font-size: 32px;
+}
+
+.title-row a.back {
+  color: var(--green-text);
+}
+
+.title-row h1 {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.text-column {
+  margin-left: 5.4%;
+  width: 77.5%;
+}
+
+/* Explore: rail + domain list + panel side by side. The section fills the
+   wireframe's frame band (rail y 22.5-94.8% = 72% of frame height; Mico,
+   2026-11-17: contents should fill the screen more). */
+.explore-body {
+  display: flex;
+  align-items: stretch;
+  min-height: 72vh;
+  margin-top: 4%;
+}
+
+.explore-rail {
+  flex: 0 0 5px;
+  align-self: stretch;
+  background: var(--green);
+}
+
+.explore-list {
+  margin-left: 2%;
+}
+
+.explore-panel-slot {
+  flex: 1 1 auto;
+  margin-left: 4%;
+}
+
+/* Landing: centered column, no top nav (PAGES.md P1). Mico, 2026-11-17:
+   the composition should fill the screen like the P1 frame does, so the
+   page is a full-viewport flex column and the P1 percentage bands are
+   viewport-height units instead of fixed pixels (23% top, mark 19vh,
+   wordmark 11vh, footer near the 86-89% band). Clamps keep extreme
+   windows sane; content flows naturally on short windows. */
+.landing {
+  /* Wide enough that the wordmark at its 11vh height never overflows the
+     column (the overflow was the off-center Mico saw 2026-11-17). */
+  max-width: 900px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Real assets (W-003): mark band starts at y 23%, ~19% of the frame tall;
+   wordmark band ~11% (intake-spec measurements from the P1 frame
+   percentages). The SVGs' viewBoxes are tightened to the art's own pixel
+   bounds, so the CSS height sizes the art itself. */
+.landing-mark {
+  /* Mico, 2026-11-17: "move the logo again slightly higher" — was 23vh. */
+  margin-top: 20vh;
+}
+
+.landing-mark img {
+  height: clamp(110px, 19vh, 220px);
+  width: auto;
+}
+
+.landing-wordmark {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 2vh 0 0 0;
+}
+
+.landing-wordmark img {
+  height: clamp(63px, 11vh, 128px);
+  width: auto;
+}
+
+.landing-cta {
+  margin-top: 3vh;
+  font-size: 24px;
+}
+
+/* Footer pinned near the P1 band (y 86-89%): margin-top auto pushes it to
+   the bottom of the full-viewport column. */
+.landing-links {
+  margin-top: auto;
+  margin-bottom: 8vh;
+  font-size: 24px;
+}
+
+.landing-links a,
+.footer-links a {
+  color: var(--green-text);
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+/* Responsive defaults (DESIGN.md section 7). Below 900px the flyout also
+   reverts to flowing below its row (the plainer option for the stacked
+   layout; DESIGN.md section 7 does not pin the flyout on small screens). */
+@media (max-width: 900px) {
+  .text-column {
+    width: 90%;
+  }
+
+  .explore-body {
+    flex-direction: column;
+  }
+
+  .explore-panel-slot {
+    margin-left: 0;
+  }
+
+  .flyout {
+    position: static;
+    width: auto;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 560px) {
+  .top-nav {
+    /* Type scale (Mico, 2026-11-17): keep the 24px body size so the nav
+       reads the same everywhere; it wraps onto two lines (section 7). */
+    font-size: 24px;
+  }
+}

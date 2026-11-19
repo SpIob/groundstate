@@ -1,0 +1,226 @@
+/* Components: domain rows, flyout, panels, tiles, table, pixel images. */
+
+/* Domain rows (DESIGN.md section 5). Status color = D-011 set B text tokens. */
+.domain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* Type scale (Mico, 2026-11-17): 24px body level; see base.css. */
+  font-size: 24px;
+}
+
+.domain-list li {
+  position: relative;
+  /* Grid multiple (Mico, 2026-11-17 scale-up): roomier rows. */
+  margin-bottom: 32px;
+}
+
+.domain-row.status-active {
+  color: var(--green-text);
+}
+
+.domain-row.status-planned {
+  color: var(--orange-text);
+}
+
+.domain-row.status-exploring {
+  color: var(--gray-text);
+}
+
+.domain-row.selected {
+  text-decoration: underline;
+}
+
+/* Flyout: green fill, panel text (PAGES.md P6; D-011 amendment 2026-10-29:
+   sub-nav inside the green sub-panel uses --ink-green via --panel-text).
+   Position: starts RIGHT of the Batteries row (DESIGN.md section 4: "starts
+   right of the Batteries row, about 24% wide"; the wireframe floats it beside
+   the row). W-002 delta audit 2026-10-30 found it rendering in flow BELOW the
+   row; Mico's 2026-11-02 disposition called that a DEFECT, fixed here in
+   W-003. The flyout is absolutely positioned against its row's li, opening
+   into the empty panel-slot area; width 240px is ~24% of the 1024 reference
+   frame at the fluid shell's desktop sizes. */
+.flyout {
+  position: absolute;
+  left: 100%;
+  top: -4px;
+  width: 240px;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--green);
+  color: var(--panel-text);
+}
+
+/* Docked variant (P7, child selected): flows below its row, where the
+   open panel leaves no room beside the row (see Flyout.tsx note). */
+.flyout.docked {
+  position: static;
+  width: auto;
+  margin-top: 8px;
+}
+
+.flyout a {
+  color: var(--panel-text);
+  display: inline-block;
+  padding: 4px 0;
+}
+
+/* Panels: flat fill, hard edges, internal scroll (DESIGN.md section 5).
+   D-011 amendment (2026-10-29): panel body text, headings, links, and
+   underlines render in --panel-text (--ink-green) on every fill; the fills
+   themselves keep the wireframe colors. */
+.panel {
+  padding: 24px;
+  overflow-y: auto;
+  /* Fill the wireframe's panel band: stretches in the explore slot, capped
+     at the internal-scroll height (DESIGN.md section 5). */
+  min-height: 60vh;
+  max-height: 72vh;
+}
+
+.panel-green {
+  background: var(--green);
+  color: var(--panel-text);
+}
+
+.panel-orange {
+  background: var(--orange);
+  color: var(--panel-text);
+}
+
+.panel-gray {
+  background: var(--gray);
+  color: var(--panel-text);
+}
+
+/* Pixel icons on the panels: the W-003 rect-SVG assets carry their fills
+   baked at token values (ink-green per the D-011 amendment for the panel
+   icons); ASSETS.md records the mapping. Sizing here. */
+.panel-icon {
+  /* 128px = 8 grid multiples (Mico, 2026-11-17 scale-up). */
+  height: 128px;
+  width: auto;
+}
+
+.panel h2 {
+  /* Type scale (Mico, 2026-11-17): 24px body level; see base.css. */
+  font-size: 24px;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+/* Table: 1px paper grid on the green panel, no zebra, no hover color. */
+.panel table {
+  border-collapse: collapse;
+  /* Type scale (Mico, 2026-11-17): 24px body level; see base.css. */
+  font-size: 24px;
+  width: 100%;
+}
+
+.panel th,
+.panel td {
+  border: 1px solid var(--paper);
+  padding: 4px 8px;
+  text-align: left;
+}
+
+/* Placeholder panels: icon centered, text centered under it (PAGES.md P8/P9). */
+.placeholder-panel {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.placeholder-panel p {
+  margin: 16px 0 0 0;
+}
+
+/* Pixel chevrons next to labels (W-003): drawn SVGs because the site font
+   lacks the single guillemets (DESIGN.md section 3). Sized off the font's
+   16px grid: 10 design rows = 0.625em, pixel-exact at 16/32px text. */
+.chevron {
+  height: 0.625em;
+  width: auto;
+  margin-left: 4px;
+}
+
+/* Contact tiles: ink-green fill, paper text, one baseline row (PAGES.md P3).
+   Mico, 2026-11-17: the row was flush-left (0% left gap, 10.7% right); the
+   P3 frame centers it (~5.6%/5.1% gaps), so the flex row centers and the
+   wrapped rows center with it. */
+.contact-tiles {
+  display: flex;
+  justify-content: center;
+  gap: 1.9%;
+  margin-top: 10%;
+  flex-wrap: wrap;
+}
+
+.contact-tile {
+  flex: 0 0 13.3%;
+  aspect-ratio: 1 / 1;
+  background: var(--ink-green);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-tile.unset {
+  outline: 2px dashed var(--gray);
+}
+
+/* DESIGN.md section 7 responsive defaults: tiles 3 per row below 900px and
+   2 per row below 560px. (W-002 delta audit 2026-10-30: no media rule touched
+   .contact-tile, so 480px wrapped 5+1 and 560px sat 6-in-a-row; Mico's
+   2026-11-02 disposition ordered the fix into W-003.) The 1.9% gap from
+   section 4 is kept; 3x32% + 2x1.9% = 99.8% and 2x48.5% + 1.9% fit one row. */
+@media (max-width: 900px) {
+  .contact-tile {
+    flex: 0 0 32%;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-tile {
+    flex: 0 0 48.5%;
+  }
+}
+
+/* Pixel images: crisp only, integer scale (DESIGN.md section 5, rule R6).
+   The W-003 rect-SVG assets ship with their fills baked at token values
+   (recorded in ASSETS.md); sizing per context below. */
+.pixel-img {
+  image-rendering: pixelated;
+}
+
+.tile-icon {
+  width: 62%;
+  height: auto;
+}
+
+/* Optical per-icon corrections (Mico, 2026-11-17): the octocat's round
+   silhouette inside its bounding box reads smaller than the solid rect
+   marks, so it renders at 86% (by-eye balance against the row, iterated
+   70/78/86); the x bird and tiktok note get their ink-centroid recentered
+   in the art files' viewBoxes (ASSETS.md). The dome reads a touch left of
+   the tile center (its thin curl balances the ink area right), so a small
+   rightward optical nudge, and lifted so the dome+chest mass reads level
+   with the row (the thin tail otherwise drags the mark low);
+   translate(%) is relative to the img box. */
+.tile-github {
+  width: 86%;
+  transform: translate(1.5%, -5%);
+}
+
+/* Disclaimer warning triangle (PAGES.md P4): centered above the text column. */
+.disclaimer-icon {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.warning-img {
+  height: 84px;
+  width: auto;
+}
