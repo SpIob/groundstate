@@ -41,7 +41,12 @@
 }
 
 .text-column {
-  margin-left: 5.4%;
+  /* DESIGN.md section 4: left 11%, width 77.5% (frame-measured). W-005
+     2026-11-19: was 5.4%, which sat the column under the title row's arrow;
+     the section 4 value (and the wireframe) start it under the title word,
+     right of the arrow. Percentages follow the file's shell-relative
+     convention (same as width and the contact tiles). */
+  margin-left: 11%;
   width: 77.5%;
 }
 

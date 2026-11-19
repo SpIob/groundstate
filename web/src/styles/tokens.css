@@ -21,8 +21,9 @@
 
   /* D-011 amendment (Mico, 2026-10-29): text and icons on the colored panel
      fills render in --ink-green, not --paper. Fills keep the wireframe (set A)
-     colors. Measured contrast: 4.16:1 on --green (known residual, below 4.5,
-     recorded in DECISIONS.md), 6.24:1 on --orange, 5.56:1 on --gray. */
+     colors. Measured contrast: 4.10:1 on --green (known residual, below 4.5;
+     corrected 4.16 -> 4.10 per Mico's W-002 disposition, recorded in
+     DECISIONS.md), 6.24:1 on --orange, 5.56:1 on --gray. */
   --panel-text: var(--ink-green);
 
   /*
