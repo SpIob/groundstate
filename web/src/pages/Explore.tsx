@@ -11,6 +11,7 @@ import { PlaceholderPanel } from "../components/PlaceholderPanel";
 import { TextBlock } from "../components/TextBlock";
 import { DOMAINS, type DomainStatus } from "../content/domains";
 import { copyCathodes } from "../content/copy.cathodes";
+import { copyDisclaimer } from "../content/copy.disclaimer";
 
 export function Explore(props: { domain?: string; child?: string }) {
   return (
@@ -71,7 +72,13 @@ function CathodesPanel() {
       <p>No candidates have passed audit yet.</p>
       <h2>Method</h2>
       <TextBlock paragraphs={[copyCathodes.method]} />
-      <p>{copyCathodes.closingLine}</p>
+      {/* P7 closing line (item 5): estimates statement + the disclaimer
+          version from the copy file (P4 ties candidate data to it). The run
+          id joins with the data in W-008 - until then the panel shows empty
+          states, so there is no run to cite. */}
+      <p>
+        {copyCathodes.closingLine} Disclaimer version {copyDisclaimer.version}.
+      </p>
     </Panel>
   );
 }

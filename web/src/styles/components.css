@@ -67,6 +67,12 @@
   padding: 4px 0;
 }
 
+/* Selection marker (D-011 option B): the selected row is marked by ‹ and an
+   underline. Applies to the chevron-less child rows too (underline alone). */
+.flyout a.selected {
+  text-decoration: underline;
+}
+
 /* Panels: flat fill, hard edges, internal scroll (DESIGN.md section 5).
    D-011 amendment (2026-10-29): panel body text, headings, links, and
    underlines render in --panel-text (--ink-green) on every fill; the fills
