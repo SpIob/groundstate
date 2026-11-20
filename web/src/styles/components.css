@@ -79,7 +79,14 @@
    themselves keep the wireframe colors. */
 .panel {
   padding: 24px;
-  overflow-y: auto;
+  /* Mico 2026-11-20: mini-page text one step smaller, 24px -> 16px. The
+     site font is a pixel font: on 2x displays only whole design-px sizes
+     stay crisp (16px = 2 device px), 20px would blur - so 16 is the
+     smallest clean step down. Headings keep 24px for hierarchy. */
+  font-size: 16px;
+  /* Mico 2026-11-20: scroll both axes - the candidates table is wider than
+     narrow panels and must scroll inside the green fill, not poke out of it. */
+  overflow: auto;
   /* Fill the wireframe's panel band: stretches in the explore slot, capped
      at the internal-scroll height (DESIGN.md section 5). */
   min-height: 60vh;
@@ -111,25 +118,33 @@
 }
 
 .panel h2 {
-  /* Type scale (Mico, 2026-11-17): 24px body level; see base.css. */
+  /* Heading level inside the mini-page (Mico 2026-11-20): stays at the
+     24px site body size while panel text drops to 16px - pixel-crisp
+     sizes on 2x displays are 16/24/32 only. */
   font-size: 24px;
   font-weight: normal;
-  margin-top: 0;
+  /* Mico 2026-11-20: readable section rhythm inside the mini-page - clear
+     gap above each heading (grid multiple), tight gap below it. */
+  margin: 32px 0 8px;
 }
 
-/* Table: 1px paper grid on the green panel, no zebra, no hover color. */
+/* Table: 1px paper grid on the green panel, no zebra, no hover color.
+   Font inherits the panel's 16px (Mico 2026-11-20). */
 .panel table {
   border-collapse: collapse;
-  /* Type scale (Mico, 2026-11-17): 24px body level; see base.css. */
-  font-size: 24px;
   width: 100%;
 }
 
 .panel th,
 .panel td {
   border: 1px solid var(--paper);
-  padding: 4px 8px;
+  /* Mico 2026-11-20: roomier cells, top-aligned so multi-line cells (long
+     citation ids) read down from the header; wrap anywhere so ids never
+     overflow their cell. */
+  padding: 8px 12px;
   text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
 }
 
 /* Placeholder panels: icon centered, text centered under it (PAGES.md P8/P9). */

@@ -12,7 +12,8 @@
     "check:look": "node scripts/check-look.mjs",
     "check:budget": "node scripts/check-budget.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "check": "npm run typecheck && npm run check:look && npm run build && npm run check:budget && npm run check:links"
+    "check:data": "node scripts/check-data.mjs",
+    "check": "npm run typecheck && npm run check:look && npm run build && npm run check:budget && npm run check:links && npm run check:data"
   },
   "dependencies": {
     "react": "^19.3.1",

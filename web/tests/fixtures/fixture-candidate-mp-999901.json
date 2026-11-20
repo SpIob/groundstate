@@ -1,0 +1,16 @@
+{
+  "fixture": true,
+  "material_id": "mp-999901",
+  "formula": "LiFixtureO4",
+  "predicted_voltage_V": 3.4239,
+  "capacity_mAh_g": 169.9,
+  "e_above_hull_eV_atom": 0.0,
+  "run_id": "run-20261119-w008-fixture-b",
+  "audit_status": "PASS WITH FLAGS",
+  "approved_by": "Fixture",
+  "approved_at": "2026-11-19",
+  "disclaimer_version": 1,
+  "citations": ["fixture-cite-1"],
+  "result_type": "computed estimate",
+  "statement": "Fixture record for the W-008 display test; never copied into results/."
+}

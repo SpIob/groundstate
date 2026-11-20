@@ -1,0 +1,18 @@
+{
+  "fixture": true,
+  "material_id": "mp-999904",
+  "formula": "Li2FixtureSiO4",
+  "predicted_voltage_V": 3.9168,
+  "capacity_mAh_g": 331.3,
+  "e_above_hull_eV_atom": "UNVERIFIED",
+  "d006_status": "unverified_gap",
+  "d006_gap_reason": "Fixture gap reason naming what was searched and not found.",
+  "run_id": "run-20261119-w008-fixture",
+  "audit_status": "PASS",
+  "approved_by": "Fixture",
+  "approved_at": "2026-11-19",
+  "disclaimer_version": 2,
+  "citations": ["fixture-cite-1", "fixture-cite-missing"],
+  "result_type": "computed estimate",
+  "statement": "Fixture record for the W-008 display test (D-006 gap form, missing citation, disclaimer mismatch); never copied into results/."
+}

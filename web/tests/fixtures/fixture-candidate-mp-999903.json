@@ -1,0 +1,16 @@
+{
+  "fixture": true,
+  "material_id": "mp-999903",
+  "formula": "LiFixtureUnapproved",
+  "predicted_voltage_V": 2.5,
+  "capacity_mAh_g": 100.0,
+  "e_above_hull_eV_atom": 0.012,
+  "run_id": "run-20261119-w008-fixture",
+  "audit_status": "PASS",
+  "approved_by": "",
+  "approved_at": "2026-11-19",
+  "disclaimer_version": 1,
+  "citations": ["fixture-cite-1"],
+  "result_type": "computed estimate",
+  "statement": "Fixture record for the W-008 gate test (empty approved_by must be skipped); never copied into results/."
+}

@@ -1,29 +1,31 @@
 // P5-P9 Explore (#/explore...): top nav, title row, green rail, domain list,
 // and the panel for the selected domain/child (docs/web/PAGES.md P5-P9).
-// Panel by status: active leaf = content panel (green; the cathodes data
-// panel is built by task W-008, so the shell shows the placeholder empty
-// states), planned = orange placeholder, exploring = gray placeholder.
+// Panel by status: active leaf = the cathodes data panel (green; task W-008
+// wires the promoted results/ data via components/CathodesPanel.tsx),
+// planned = orange placeholder, exploring = gray placeholder.
 import { Nav } from "../components/Nav";
 import { TitleRow } from "../components/TitleRow";
 import { DomainList } from "../components/DomainList";
-import { Panel } from "../components/Panel";
 import { PlaceholderPanel } from "../components/PlaceholderPanel";
-import { TextBlock } from "../components/TextBlock";
+import { CathodesPanel } from "../components/CathodesPanel";
 import { DOMAINS, type DomainStatus } from "../content/domains";
-import { copyCathodes } from "../content/copy.cathodes";
-import { copyDisclaimer } from "../content/copy.disclaimer";
 
 export function Explore(props: { domain?: string; child?: string }) {
+  const panel = panelFor(props.domain, props.child);
   return (
     <main className="shell">
       <Nav />
       <TitleRow title="Explore" />
-      <div className="explore-body">
+      {/* Mico 2026-11-20: `with-panel` only gates the sidebar's height cap
+          (see layout.css) - the margins are unconditional. It must NOT be
+          applied when the flyout floats (P6): overflow on .explore-list
+          clips the absolutely positioned flyout and hides it. */}
+      <div className={`explore-body${panel ? " with-panel" : ""}`}>
         <div className="explore-rail" aria-hidden="true" />
         <div className="explore-list">
           <DomainList selectedDomain={props.domain} selectedChild={props.child} />
         </div>
-        <div className="explore-panel-slot">{panelFor(props.domain, props.child)}</div>
+        <div className="explore-panel-slot">{panel}</div>
       </div>
     </main>
   );
@@ -57,28 +59,4 @@ function placeholderFor(status: DomainStatus): ReturnType<typeof PlaceholderPane
     return <PlaceholderPanel kind={status} />;
   }
   return null;
-}
-
-// P7 shell: the real benchmark/candidates tables arrive with W-008, which
-// owns the data rules. Until then the panel renders the approved empty-state
-// strings and the copy slots as pending-approval stubs.
-function CathodesPanel() {
-  return (
-    <Panel kind="green">
-      <TextBlock paragraphs={[copyCathodes.intro]} />
-      <h2>Benchmark</h2>
-      <p>Benchmark has not been run yet.</p>
-      <h2>Candidates</h2>
-      <p>No candidates have passed audit yet.</p>
-      <h2>Method</h2>
-      <TextBlock paragraphs={[copyCathodes.method]} />
-      {/* P7 closing line (item 5): estimates statement + the disclaimer
-          version from the copy file (P4 ties candidate data to it). The run
-          id joins with the data in W-008 - until then the panel shows empty
-          states, so there is no run to cite. */}
-      <p>
-        {copyCathodes.closingLine} Disclaimer version {copyDisclaimer.version}.
-      </p>
-    </Panel>
-  );
 }

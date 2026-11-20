@@ -58,6 +58,13 @@
   align-items: stretch;
   min-height: 72vh;
   margin-top: 4%;
+  /* Mico 2026-11-20: the whole sidebar (rail + domain list) sits a bit more
+     left and the mini-page a bit wider to the right - the section spans the
+     full shell width (one 16px grid step escaping the padding on each side),
+     so sidebar and panel sit at equal distances from the page edges, the
+     same whether or not a tab is open. */
+  margin-left: -16px;
+  margin-right: -16px;
 }
 
 .explore-rail {
@@ -68,11 +75,40 @@
 
 .explore-list {
   margin-left: 2%;
+  /* Don't shrink below the rows' content width. */
+  flex: 0 0 auto;
+  /* No overflow here by default: the P6 flyout is absolutely positioned at
+     left: 100% of its row, and an overflow value on this column would clip
+     it (Mico 2026-11-20 bug). The cap below applies only with a mini-page
+     open, when the flyout is docked in-flow. */
+}
+
+/* Mico 2026-11-20: with a mini-page open, the sidebar keeps its no-tab
+   length (the 72vh band). The docked flyout adds height to this column and
+   would stretch the rail down past the fold, so cap the column at the band
+   and scroll inside it instead. */
+.explore-body.with-panel .explore-list {
+  max-height: 72vh;
+  overflow-y: auto;
 }
 
 .explore-panel-slot {
   flex: 1 1 auto;
-  margin-left: 4%;
+  /* Mico 2026-11-20: gap sidebar -> mini-page halved (4% -> 2%) so the
+     mini-page is wider; its right edge already sits at the shell edge. */
+  margin-left: 2%;
+}
+
+/* Mico 2026-11-20: on wide windows there is room in the shell's centering
+   margin, so the section can extend one more 16px step each side (sidebar
+   further left, mini-page further right) while keeping equal distances
+   from the page edges. Guarded at 1432px so the rail/panel never clip off
+   the viewport on narrower windows. */
+@media (min-width: 1432px) {
+  .explore-body {
+    margin-left: -32px;
+    margin-right: -32px;
+  }
 }
 
 /* Landing: centered column, no top nav (PAGES.md P1). Mico, 2026-11-17:
@@ -148,6 +184,20 @@
 
   .explore-body {
     flex-direction: column;
+    /* Stacked layout keeps the shell padding and lets the sidebar flow
+       naturally (Mico 2026-11-20 desktop rules are row-layout only). */
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .explore-list {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .explore-body.with-panel .explore-list {
+    max-height: none;
+    overflow: visible;
   }
 
   .explore-panel-slot {

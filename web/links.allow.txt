@@ -16,6 +16,19 @@ https://react.dev/errors/
 # links in citations; each verified when its citation note was written).
 https://next-gen.materialsproject.org
 https://www.diva-portal.org/smash/get/diva2:160906/FULLTEXT01.pdf
+# W-008 (2026-11-19): the citations column links each stored citation id to
+# its identifier - https://doi.org/<DOI built from the stored "DOI <doi>"
+# identifier. The DOIs themselves were verified live when each citation note
+# was written (references/literature/); doi.org is only the resolver.
+https://doi.org/10.1149/1.1401083
+https://doi.org/10.3390/ma6031028
+https://doi.org/10.1016/j.electacta.2013.07.190
+https://doi.org/10.1038/srep15555
+https://doi.org/10.1016/j.elecom.2004.11.008
+# The doi.org resolver base also appears as a string constant in the JS
+# bundle (display.ts builds hrefs as `https://doi.org/<stored DOI>`); the
+# five exact URLs above are the only identifiers the live data names.
+https://doi.org/
 # Font license record (public/fonts/LICENSE-*.txt, copied to dist/): the
 # /efont/ Shinonome project page cited as public-domain evidence. Prose-only
 # reference in a text file, never fetched at runtime (W-003, 2026-11-17).

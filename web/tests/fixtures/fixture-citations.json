@@ -1,0 +1,17 @@
+{
+  "fixture": true,
+  "citations": [
+    {
+      "id": "fixture-cite-1",
+      "type": "paper",
+      "title": "Fixture citation one",
+      "authors": ["F. Ixture"],
+      "year": 2001,
+      "identifier": "DOI 10.1/fixture-a",
+      "version": "1",
+      "accessed_at": "2026-11-19",
+      "verified": true,
+      "verified_by": "fixture"
+    }
+  ]
+}

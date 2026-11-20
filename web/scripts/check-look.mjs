@@ -198,6 +198,16 @@ for (const [f, text] of allSrc.filter(([f]) => f.startsWith(distDir))) {
   if (/\bTODO\b|DRAFT/i.test(text)) fail("R8", `${relative(webDir, f)}: TODO/DRAFT string`);
 }
 
+// ---------- W-008: no test fixture may reach dist/ ----------
+// gs-web-data-view step 9: fixtures live in web/tests/fixtures/ (marker
+// "fixture": true) and must never ship. check:data re-runs this over dist/
+// after the build; this keeps it enforced whenever dist/ exists.
+for (const [f, text] of allSrc.filter(([f]) => f.startsWith(distDir))) {
+  if (/"fixture"\s*:\s*true/.test(text) || /fixture/i.test(relative(distDir, f))) {
+    fail("W-008", `${relative(webDir, f)}: test fixture reached dist/ (gs-web-data-view step 9)`);
+  }
+}
+
 // ---------- R6: pixel images crisp ----------
 for (const f of srcFiles.filter((f) => extname(f) === ".tsx")) {
   const text = read(f);
