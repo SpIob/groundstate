@@ -166,3 +166,16 @@ New fork → append a `D-0XX` section here in this same shape: status, context, 
 Blocks: W-002 onward until M4 closes and M5 opens (`docs/ROADMAP.md` M5 row).
 
 Numbering note: this question was drafted as D-008 alongside the website fork's specs, but the T-004 Mn-olivine proposal took D-008 first (recorded in `tasks/BOARD.md` and `docs/WORKLOG.md` on 2026-10-22), so it renumbers to D-013 and every reference to it is updated. Only Mico renumbers or retires decision numbers.
+
+---
+
+## D-014: Should the site publish the G1 benchmark table? (PROPOSED by Web Builder session, 2026-11-19, task W-008)
+**Status: PROPOSED — open for Mico.**
+
+Context: PAGES.md P7 item 2 lists a benchmark table (material, predicted V, reference V, difference V, reference citation) as a permanent panel element, with the empty state `Benchmark has not been run yet.` until results exist. But the `results/` contract defines no benchmark shape — `benchmark.json` lives only in `pipeline/runs/` — and the live `results/index.json` carries `benchmark_run_id: null`. G1 did run (T-003): verdict **FAIL** on the D-003 gate (LiCoO2 −0.408 V; ordering check also failed), recorded as a characterized limitation per D-007, gate unchanged. W-008 therefore ships the benchmark region as the empty state and stops there: rendering the table from anything but promoted `results/` would break the data-view rules, and publishing a FAIL-verdict table is a science-presentation call, not a build detail.
+
+- **A — Leave the empty state:** the benchmark stays run-internal (visible in the run folder and in each candidate's `benchmark_gate` enrichment). The site never shows a table that failed its own gate. Zero work.
+- **B — Promote benchmark.json into `results/`** (new contract shape + index field + promotion pass) and render the three-material table with the D-007 framing: a line stating the LCO miss is a characterized chemistry-correlated offset (D-007/D-008), so the panel shows the honest trust check including its failure. Most transparent; needs a small contract change and approved framing copy (W-004).
+- **C — Prose only:** a short approved line stating the benchmark ran and how its outcome is framed (no table, no schema change).
+
+Recommendation: B at launch — the benchmark table is the trust story of the whole screen — but only with Mico-approved framing copy, so A is the safe default until then. Blocks nothing today: the region is built and the empty state is per spec.
